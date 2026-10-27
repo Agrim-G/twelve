@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BrewHouse | Specialty coffee and bakes</title>
+<meta name="description" content="BrewHouse is a neighbourhood specialty coffee shop. Browse the menu and order for pickup (demo).">
+<meta name="theme-color" content="#26170f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2326170f'/%3E%3Cellipse cx='16' cy='16' rx='6' ry='9' fill='%23f4ecdf' transform='rotate(30 16 16)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="demo" role="note">Demo website: orders are simulated and will never reach a real café.</div>
+
+<header class="top">
+  <a class="logo" href="#top">BrewHouse</a>
+  <nav aria-label="Main">
+    <a href="#menu">Menu</a><a href="#about">About</a><a href="#visit">Visit</a><a href="#contact">Contact</a>
+  </nav>
+  <button class="cart-btn" id="cartBtn" aria-label="Open cart">Cart <span id="cartCount">0</span></button>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <p class="open-badge" id="openBadge"></p>
+    <h1>Slow mornings, carefully pulled shots.</h1>
+    <p class="lead">BrewHouse is a small specialty coffee shop serving single-origin espresso, spiced teas and pastries baked every morning. Order ahead and collect at the counter.</p>
+    <div class="actions"><a class="btn" href="#menu">Order for pickup</a><a class="btn ghost" href="#visit">Hours and location</a></div>
+  </div>
+  <div class="hero-art" id="heroArt" aria-hidden="true"></div>
+</section>
+
+<section class="sec" id="featured">
+  <h2>Favourites this season</h2>
+  <div class="grid feat" id="featGrid"></div>
+</section>
+
+<section class="sec menu-sec" id="menu">
+  <h2>The menu</h2>
+  <p class="sub">Prices in INR, inclusive of nothing extra: 5% GST is added at checkout.</p>
+  <div class="tools">
+    <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+    <label class="search"><span class="sr">Search the menu</span><input id="search" type="search" placeholder="Search drinks and bakes" autocomplete="off"></label>
+  </div>
+  <p class="count" id="count" aria-live="polite"></p>
+  <div class="grid" id="menuGrid"></div>
+</section>
+
+<section class="sec about" id="about">
+  <h2>About BrewHouse</h2>
+  <div class="cols">
+    <p>We opened in 2019 in a converted flour mill with one grinder, one oven and a short menu. The room is still small, the counter still faces the window, and most people who come in are neighbours.</p>
+    <p>We buy green coffee directly from estates in Karnataka and Kerala, roast it weekly in small batches, and change the espresso as the harvest changes. Pastries are laminated and baked in-house before we open.</p>
+    <p>Kahwa, chai and cardamom are on the menu because they are what we drink at home. If you want something not listed, ask. We like a challenge.</p>
+  </div>
+</section>
+
+<section class="sec visit" id="visit">
+  <h2>Visit us</h2>
+  <div class="cols two">
+    <div>
+      <h3>Opening hours</h3>
+      <table class="hours" id="hours"><tbody>
+        <tr data-d="1,2,3,4,5"><th>Monday to Friday</th><td>7:30 am to 9:00 pm</td></tr>
+        <tr data-d="6,0"><th>Saturday and Sunday</th><td>8:30 am to 10:00 pm</td></tr>
+      </tbody></table>
+      <h3>Find us</h3>
+      <address>21 Chinar Lane, Old Mill Quarter<br>(fictional address for this demo)<br>Phone: +91 00000 00000<br>hello@brewhouse.example</address>
+      <p>Pickup orders are handed over at the end of the counter by the window. Street parking is free after 6 pm.</p>
+    </div>
+    <form class="form" id="contact" novalidate>
+      <h3>Send us a message</h3>
+      <label>Your name<input name="n" required autocomplete="name"></label>
+      <label>Email<input name="e" type="email" required autocomplete="email"></label>
+      <label>Message<textarea name="m" rows="4" required></textarea></label>
+      <button class="btn" type="submit">Send message</button>
+      <p class="note" id="contactNote" role="status">This form is a demo. Nothing is sent anywhere.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><strong>BrewHouse</strong> &nbsp; A fictional café. This is a demo site and orders are not real.</footer>
+
+<div id="scrim" hidden></div>
+<aside id="cart" aria-label="Your cart" aria-hidden="true">
+  <div class="cart-head"><h2>Your order</h2><button class="x" data-closecart aria-label="Close cart">&times;</button></div>
+  <p class="note">Demo only: no real order is placed and no payment is taken.</p>
+  <div id="cartBody"></div>
+  <div class="cart-foot" id="cartFoot"></div>
+</aside>
+
+<dialog id="dlgCustom" aria-labelledby="cTitle"><form method="dialog" id="customForm">
+  <h3 id="cTitle"></h3><p class="note" id="cDesc"></p>
+  <fieldset id="fsSize"><legend>Size</legend></fieldset>
+  <fieldset id="fsMilk"><legend>Milk</legend></fieldset>
+  <div class="row"><button class="btn ghost" type="button" data-close>Cancel</button><button class="btn" id="cAdd" type="submit"></button></div>
+</form></dialog>
+
+<dialog id="dlgCheckout" aria-labelledby="coTitle"><form id="coForm" novalidate>
+  <h3 id="coTitle">Pickup details</h3>
+  <p class="note strong">This is a simulated order. It will not reach a real café and no payment is taken.</p>
+  <div id="coSummary" class="summary"></div>
+  <label>Name<input name="name" required autocomplete="name"></label>
+  <label>Phone number<input name="phone" type="tel" required inputmode="numeric" placeholder="10-digit mobile number" autocomplete="tel"></label>
+  <label>Pickup time<select name="time" id="coTime"></select></label>
+  <label>Notes for the barista (optional)<textarea name="notes" rows="2"></textarea></label>
+  <p class="error" id="coErr" role="alert"></p>
+  <div class="row"><button class="btn ghost" type="button" data-close>Back</button><button class="btn" type="submit">Place demo order</button></div>
+</form></dialog>
+
+<dialog id="dlgDone" aria-labelledby="dnTitle"><div>
+  <h3 id="dnTitle">Demo order confirmed</h3>
+  <p id="dnMeta"></p>
+  <div id="dnSummary" class="summary"></div>
+  <p class="note strong">Reminder: this order was simulated. Nobody is making your drinks and there is nothing to collect.</p>
+  <div class="row"><button class="btn" data-close>Back to the menu</button></div>
+</div></dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="menu.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
